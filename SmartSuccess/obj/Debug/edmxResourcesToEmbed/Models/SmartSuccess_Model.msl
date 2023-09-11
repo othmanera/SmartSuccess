@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SmartSuccessModelStoreContainer" CdmEntityContainer="SmartSuccessEntities">
+    <EntitySetMapping Name="Etudiants">
+      <EntityTypeMapping TypeName="SmartSuccessModel.Etudiant">
+        <MappingFragment StoreEntitySet="Etudiant">
+          <ScalarProperty Name="ID_Etudiant" ColumnName="ID_Etudiant" />
+          <ScalarProperty Name="Nom" ColumnName="Nom" />
+          <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+          <ScalarProperty Name="ID_Niveau" ColumnName="ID_Niveau" />
+          <ScalarProperty Name="Date_Inscription" ColumnName="Date_Inscription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Matieres">
+      <EntityTypeMapping TypeName="SmartSuccessModel.Matiere">
+        <MappingFragment StoreEntitySet="Matiere">
+          <ScalarProperty Name="ID_Matiere" ColumnName="ID_Matiere" />
+          <ScalarProperty Name="Nom" ColumnName="Nom" />
+          <ScalarProperty Name="Prix" ColumnName="Prix" />
+          <ScalarProperty Name="ID_Paiement" ColumnName="ID_Paiement" />
+          <ScalarProperty Name="ID_Professeur" ColumnName="ID_Professeur" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Niveaux">
+      <EntityTypeMapping TypeName="SmartSuccessModel.Niveau">
+        <MappingFragment StoreEntitySet="Niveau">
+          <ScalarProperty Name="ID_Niveau" ColumnName="ID_Niveau" />
+          <ScalarProperty Name="Nom" ColumnName="Nom" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Paiements">
+      <EntityTypeMapping TypeName="SmartSuccessModel.Paiement">
+        <MappingFragment StoreEntitySet="Paiement">
+          <ScalarProperty Name="ID_Paiement" ColumnName="ID_Paiement" />
+          <ScalarProperty Name="Date_Paiement" ColumnName="Date_Paiement" />
+          <ScalarProperty Name="Prix" ColumnName="Prix" />
+          <ScalarProperty Name="Etat" ColumnName="Etat" />
+          <ScalarProperty Name="ID_Etudiant" ColumnName="ID_Etudiant" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Professeurs">
+      <EntityTypeMapping TypeName="SmartSuccessModel.Professeur">
+        <MappingFragment StoreEntitySet="Professeur">
+          <ScalarProperty Name="ID_Professeur" ColumnName="ID_Professeur" />
+          <ScalarProperty Name="Nom" ColumnName="Nom" />
+          <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

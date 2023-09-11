@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SmartSuccessModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Etudiant">
+    <Key>
+      <PropertyRef Name="ID_Etudiant" />
+    </Key>
+    <Property Name="ID_Etudiant" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ID_Niveau" Type="Int32" />
+    <Property Name="Date_Inscription" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Niveau" Relationship="Self.FK__Etudiant__ID_Niv__5EBF139D" FromRole="Etudiant" ToRole="Niveau" />
+    <NavigationProperty Name="Paiements" Relationship="Self.FK__Paiement__ID_Etu__6383C8BA" FromRole="Etudiant" ToRole="Paiement" />
+  </EntityType>
+  <EntityType Name="Matiere">
+    <Key>
+      <PropertyRef Name="ID_Matiere" />
+    </Key>
+    <Property Name="ID_Matiere" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Prix" Type="Double" />
+    <Property Name="ID_Paiement" Type="Int32" />
+    <Property Name="ID_Professeur" Type="Int32" />
+    <NavigationProperty Name="Paiement" Relationship="Self.FK__Matiere__ID_Paie__6754599E" FromRole="Matiere" ToRole="Paiement" />
+    <NavigationProperty Name="Professeur" Relationship="Self.FK__Matiere__ID_Prof__66603565" FromRole="Matiere" ToRole="Professeur" />
+  </EntityType>
+  <EntityType Name="Niveau">
+    <Key>
+      <PropertyRef Name="ID_Niveau" />
+    </Key>
+    <Property Name="ID_Niveau" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Etudiants" Relationship="Self.FK__Etudiant__ID_Niv__5EBF139D" FromRole="Niveau" ToRole="Etudiant" />
+  </EntityType>
+  <EntityType Name="Paiement">
+    <Key>
+      <PropertyRef Name="ID_Paiement" />
+    </Key>
+    <Property Name="ID_Paiement" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date_Paiement" Type="DateTime" Precision="0" />
+    <Property Name="Prix" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Etat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ID_Etudiant" Type="Int32" />
+    <NavigationProperty Name="Etudiant" Relationship="Self.FK__Paiement__ID_Etu__6383C8BA" FromRole="Paiement" ToRole="Etudiant" />
+    <NavigationProperty Name="Matieres" Relationship="Self.FK__Matiere__ID_Paie__6754599E" FromRole="Paiement" ToRole="Matiere" />
+  </EntityType>
+  <EntityType Name="Professeur">
+    <Key>
+      <PropertyRef Name="ID_Professeur" />
+    </Key>
+    <Property Name="ID_Professeur" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Matieres" Relationship="Self.FK__Matiere__ID_Prof__66603565" FromRole="Professeur" ToRole="Matiere" />
+  </EntityType>
+  <Association Name="FK__Etudiant__ID_Niv__5EBF139D">
+    <End Role="Niveau" Type="Self.Niveau" Multiplicity="0..1" />
+    <End Role="Etudiant" Type="Self.Etudiant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Niveau">
+        <PropertyRef Name="ID_Niveau" />
+      </Principal>
+      <Dependent Role="Etudiant">
+        <PropertyRef Name="ID_Niveau" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Paiement__ID_Etu__6383C8BA">
+    <End Role="Etudiant" Type="Self.Etudiant" Multiplicity="0..1" />
+    <End Role="Paiement" Type="Self.Paiement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Etudiant">
+        <PropertyRef Name="ID_Etudiant" />
+      </Principal>
+      <Dependent Role="Paiement">
+        <PropertyRef Name="ID_Etudiant" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Matiere__ID_Paie__6754599E">
+    <End Role="Paiement" Type="Self.Paiement" Multiplicity="0..1" />
+    <End Role="Matiere" Type="Self.Matiere" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Paiement">
+        <PropertyRef Name="ID_Paiement" />
+      </Principal>
+      <Dependent Role="Matiere">
+        <PropertyRef Name="ID_Paiement" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Matiere__ID_Prof__66603565">
+    <End Role="Professeur" Type="Self.Professeur" Multiplicity="0..1" />
+    <End Role="Matiere" Type="Self.Matiere" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Professeur">
+        <PropertyRef Name="ID_Professeur" />
+      </Principal>
+      <Dependent Role="Matiere">
+        <PropertyRef Name="ID_Professeur" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SmartSuccessEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Etudiants" EntityType="Self.Etudiant" />
+    <EntitySet Name="Matieres" EntityType="Self.Matiere" />
+    <EntitySet Name="Niveaux" EntityType="Self.Niveau" />
+    <EntitySet Name="Paiements" EntityType="Self.Paiement" />
+    <EntitySet Name="Professeurs" EntityType="Self.Professeur" />
+    <AssociationSet Name="FK__Etudiant__ID_Niv__5EBF139D" Association="Self.FK__Etudiant__ID_Niv__5EBF139D">
+      <End Role="Niveau" EntitySet="Niveaux" />
+      <End Role="Etudiant" EntitySet="Etudiants" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Paiement__ID_Etu__6383C8BA" Association="Self.FK__Paiement__ID_Etu__6383C8BA">
+      <End Role="Etudiant" EntitySet="Etudiants" />
+      <End Role="Paiement" EntitySet="Paiements" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Matiere__ID_Paie__6754599E" Association="Self.FK__Matiere__ID_Paie__6754599E">
+      <End Role="Paiement" EntitySet="Paiements" />
+      <End Role="Matiere" EntitySet="Matieres" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Matiere__ID_Prof__66603565" Association="Self.FK__Matiere__ID_Prof__66603565">
+      <End Role="Professeur" EntitySet="Professeurs" />
+      <End Role="Matiere" EntitySet="Matieres" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

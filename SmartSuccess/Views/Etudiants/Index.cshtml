@@ -1,0 +1,53 @@
+﻿@model IEnumerable<SmartSuccess.Models.Etudiant>
+@{
+    ViewBag.Title = "Liste des étudiants";
+}
+
+<h2>Liste étudiants</h2>
+
+<p>
+    @Html.ActionLink("Ajouter étudiant", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Prenom)
+        </th>
+        <th>
+            <label> Date d'inscription </label>
+        </th>
+        <th>
+            <label> Niveau </label>
+        </th>
+        
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Prenom)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Date_Inscription)
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Niveau.Nom)
+            </td>
+            <td>
+                @Html.ActionLink("Modifier", "Edit", new { id = item.ID_Etudiant }) |
+                @Html.ActionLink("Détails", "Details", new { id = item.ID_Etudiant }) |
+                @Html.ActionLink("Supprimer", "Delete", new { id = item.ID_Etudiant })
+            </td>
+        </tr>
+    }
+
+</table>
